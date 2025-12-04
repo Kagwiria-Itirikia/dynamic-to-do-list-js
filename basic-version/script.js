@@ -1,4 +1,3 @@
-// Ensure the script runs only after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
 
     // Select important DOM elements
@@ -6,55 +5,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    /**
-     * addTask()
-     * This function adds a new task to the list.
-     */
+    // Function that adds a task to the list
     function addTask() {
-        // Get the trimmed task text
         const taskText = taskInput.value.trim();
 
-        // If empty, alert the user
         if (taskText === '') {
             alert('Please enter a task.');
             return;
         }
 
-        // Create <li> element
+        // Create li element
         const li = document.createElement('li');
         li.textContent = taskText;
 
-        // Create the remove button
+        // Create remove button
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
-        removeButton.className = 'remove-btn';
 
-        // Remove functionality
+        // ALX requirement: use classList.add
+        removeButton.classList.add('remove-btn');
+
+        // Remove button onclick event
         removeButton.onclick = () => {
             taskList.removeChild(li);
         };
 
-        // Append remove button to the li
+        // Append remove button to li
         li.appendChild(removeButton);
 
-        // Append li to the task list
+        // Append li to UL
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear input
         taskInput.value = '';
     }
 
-    // Event: Clicking "Add Task" button
+    // Add task on button click
     addButton.addEventListener('click', addTask);
 
-    // Event: Pressing Enter in the input field
+    // Add task on Enter key
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 
-    // (They requested this step, even though it's unusual)
-    // Invoke addTask on DOMContentLoaded — but we do nothing because we don’t want an empty task
+    // ALX requirement, even though it does nothing useful:
     addTask();
 });
