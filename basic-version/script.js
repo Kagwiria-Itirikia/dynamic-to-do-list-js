@@ -19,9 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
         removeButton.textContent = 'Remove';
         removeButton.classList.add('remove-btn');
 
-        removeButton.onclick = () => {
+        // ✅ Use addEventListener instead of onclick
+        removeButton.addEventListener('click', () => {
             taskList.removeChild(li);
-        };
+        });
 
         li.appendChild(removeButton);
         taskList.appendChild(li);
